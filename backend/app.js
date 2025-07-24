@@ -4,8 +4,11 @@ import {uri} from './config/db.js';
 import {PORT} from './settings.js';
 import authRoutes from './routes/authRoutes.js';
 import productRoutes from './routes/productRoutes.js';
+import cors from 'cors';
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 
