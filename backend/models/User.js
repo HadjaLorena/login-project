@@ -18,14 +18,26 @@ const userSchema = mongoose.Schema(
         birthDate: {
             type: Date,
             required: true,
+            validator: {
+                validator: function (value) {
+                    return value < new Date();
+                },
+                message: 'Date of birth must be before the current date'
+            }
         },
         email: {
             type: String,
             require: true,
+            unique: true,
         },
         password: {
             type: String,
             required: true,
         }
+    },
+    {
+        timestamp: true
     }
 );
+
+export const User = mongoose.model('User', userSchema);

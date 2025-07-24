@@ -1,13 +1,21 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
-import jsonwebtoken from 'jsonwebtoken';
 import {uri} from './config/db.js';
 import {PORT} from './settings.js';
+import authRoutes from './routes/authRoutes.js';
+import productRoutes from './routes/productRoutes.js';
 
 const app = express();
 
 app.use(express.json());
+
+// Chamadas das rotas
+app.use('/api/auth', authRoutes);
+app.use('/api/products', productRoutes);
+
+app.get('/', (req, res) => {
+    res.send('API is running');
+});
 
 mongoose
 .connect(uri)
